@@ -1,0 +1,32 @@
+{
+  "name": "dapp-store-clone",
+  "version": "0.0.1",
+  "description": "## What is in it - Graphql - RWD Web APP (React) - Android + iOS (React Native)",
+  "main": "index.js",
+  "scripts": {
+    "start": "PORT=3000 nodemon --exec ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHAOWEICHIU/dapp-store-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHAOWEICHIU/dapp-store-clone/issues"
+  },
+  "homepage": "https://github.com/CHAOWEICHIU/dapp-store-clone#readme",
+  "dependencies": {
+    "apollo-server": "^2.6.3",
+    "graphql": "^14.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.8",
+    "nodemon": "^1.19.1",
+    "tslint": "^5.17.0",
+    "tslint-config-prettier": "^1.18.0",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  }
+}
