@@ -1,16 +1,80 @@
 import { ApolloServer, gql } from "apollo-server";
+import * as firebase from "firebase";
+import { ResolverMap, UserInput } from "./types/graphql-utils";
 
-const { PORT = 3000 } = process.env;
+const bcrypt = require("bcryptjs");
+const salt = bcrypt.genSaltSync(10);
+
+const uuid = require("uuid/v4");
+require("dotenv").config();
+
+const { PORT = 3000, FIREBASE_API_KEY, FIREBASE_DB_URL } = process.env;
+
+firebase.initializeApp({
+  apiKey: FIREBASE_API_KEY,
+  databaseURL: FIREBASE_DB_URL
+});
+
+function createUser({ email, password }: UserInput): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    firebase
+      .database()
+      .ref("users/" + uuid())
+      .set({
+        email,
+        password
+      })
+      .then(() => {
+        resolve(true);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
+
+function getUsers() {
+  return new Promise((resolve, reject) => {
+    firebase
+      .database()
+      .ref("users")
+      .on(
+        "value",
+        snapshot => {
+          resolve(Object.keys(snapshot.val()).map(x => ({ id: x })));
+        },
+        (errorObject: any) => {
+          reject(errorObject);
+        }
+      );
+  });
+}
 
 const typeDefs = gql`
+  type User {
+    id: ID
+  }
+
   type Query {
-    hello: String
+    users: [User]
+  }
+
+  type Mutation {
+    register(email: String!, password: String!): Boolean
   }
 `;
 
-const resolvers = {
+const resolvers: ResolverMap = {
   Query: {
-    hello: () => "world"
+    users: () => {
+      return getUsers();
+    }
+  },
+  Mutation: {
+    register: async (_, { email, password }: UserInput): Promise<boolean> => {
+      const hashedPassword = await bcrypt.hashSync(password, salt);
+      return createUser({ email, password: hashedPassword });
+    }
   }
 };
 
