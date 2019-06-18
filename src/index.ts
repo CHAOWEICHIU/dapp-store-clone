@@ -56,12 +56,12 @@ function getUsers() {
 }
 
 const typeDefs = gql`
-  type User {
+  type Hello {
     id: ID
   }
 
   type Query {
-    users: [User]
+    users: [Hello]
   }
 
   type Mutation {
