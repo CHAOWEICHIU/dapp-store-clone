@@ -58,7 +58,6 @@ function getUsers() {
 const typeDefs = gql`
   type User {
     id: ID
-    name: String
   }
 
   type Query {
