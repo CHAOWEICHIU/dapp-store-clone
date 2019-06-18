@@ -8,7 +8,12 @@ const salt = bcrypt.genSaltSync(10);
 const uuid = require("uuid/v4");
 require("dotenv").config();
 
-const { PORT = 3000, FIREBASE_API_KEY, FIREBASE_DB_URL } = process.env;
+const {
+  PORT = 3000,
+  FIREBASE_API_KEY,
+  FIREBASE_DB_URL,
+  ENGINE_API_KEY
+} = process.env;
 
 firebase.initializeApp({
   apiKey: FIREBASE_API_KEY,
@@ -80,7 +85,8 @@ const resolvers: ResolverMap = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  engine: { apiKey: ENGINE_API_KEY }
 });
 
 server.listen(PORT).then(({ url }) => {
