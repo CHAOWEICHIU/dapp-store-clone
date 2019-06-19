@@ -1,7 +1,8 @@
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer, gql, MockList } from "apollo-server";
 import * as firebase from "firebase";
 import { ResolverMap, UserInput } from "./types/graphql-utils";
 
+const casual = require("casual");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
@@ -56,12 +57,44 @@ function getUsers() {
 }
 
 const typeDefs = gql`
+  type Photo {
+    uid: ID
+    name: String
+    src: String
+  }
+
+  type Category {
+    uid: ID
+    name: String
+  }
+
   type User {
-    id: ID
+    uid: ID
+    email: String
+    name: String
+  }
+
+  type App {
+    uid: ID
+    authors: [User]
+
+    name: String
+    introduction: String
+    category: Category
+    url: String
+    photos: [Photo]
+  }
+
+  type Contract {
+    address: String
+    explorerLink: String
   }
 
   type Query {
+    me: User
     users: [User]
+    apps: [App]
+    banners: [Photo]
   }
 
   type Mutation {
@@ -86,7 +119,29 @@ const resolvers: ResolverMap = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  engine: { apiKey: ENGINE_API_KEY }
+  engine: { apiKey: ENGINE_API_KEY },
+  mocks: {
+    User: () => ({
+      uid: uuid(),
+      email: casual.email,
+      name: casual.name
+    }),
+    App: () => ({
+      uid: uuid(),
+      authors: () => new MockList([1, 4]),
+      name: casual.title,
+      introduction: casual.description,
+      url: casual.url,
+      photos: () => new MockList([2, 5])
+    }),
+    Photo: () => ({
+      uid: uuid(),
+      name: casual.name
+    }),
+    Query: () => ({
+      apps: () => new MockList([1, 30])
+    })
+  }
 });
 
 server.listen(PORT).then(({ url }) => {
