@@ -21,6 +21,7 @@
   "dependencies": {
     "apollo-server": "^2.6.3",
     "bcryptjs": "^2.4.3",
+    "casual": "^1.6.2",
     "dotenv": "^8.0.0",
     "firebase": "^6.2.0",
     "graphql": "^14.3.1",

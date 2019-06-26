@@ -4,7 +4,7 @@
 
 ## What is in it
 
-- Graphql
+- Graphql(Graphql Server federation with firebase functions)
 - RWD Web APP (React)
 - Android + iOS (React Native)
 
