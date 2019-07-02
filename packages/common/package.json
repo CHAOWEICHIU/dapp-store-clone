@@ -1,0 +1,33 @@
+{
+  "name": "@monorepo/common",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/big.js": "^4.0.5",
+    "@types/node": "^10.3.2",
+    "jest": "^24.8.0",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "jest"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "globals": {
+      "NODE_ENV": "test"
+    },
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ]
+  }
+}

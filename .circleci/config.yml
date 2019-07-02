@@ -26,16 +26,18 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - run: sudo npm install --global yarn
+      - run: sudo npm install --global apollo
 
       # CircleCI needs global installs to be sudo
-      - run: sudo npm install --global apollo
+      - run: yarn install
+      - run: yarn run build
 
       # Start the GraphQL server.  If a different command is used to
       # start the server, use it in place of `npm start` here.
       - run:
           name: Starting server
-          command: npm start
+          command: node packages/server
           background: true
 
       # make sure the server has enough time to start up before running
@@ -60,4 +62,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run test
+      - run: yarn run test
