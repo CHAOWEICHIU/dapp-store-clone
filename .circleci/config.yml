@@ -27,7 +27,7 @@ jobs:
             - v1-dependencies-
 
       - run: sudo npm install --global yarn
-      - run: sudo npm install --global apollo-cli
+      - run: sudo npm install --global apollo
 
       # CircleCI needs global installs to be sudo
       - run: yarn install
