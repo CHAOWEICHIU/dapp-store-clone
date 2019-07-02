@@ -1,0 +1,30 @@
+{
+  "name": "@monorepo/server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@monorepo/common": "1.0.0",
+    "@types/graphql": "^14.2.2",
+    "@types/node": "^12.0.8",
+    "@types/express": "^4.17.0",
+    "@types/uuid": "^3.4.4",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "start:watch": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
+  "dependencies": {
+    "apollo-server": "^2.6.7",
+    "casual": "^1.6.2",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "graphql": "^14.4.1",
+    "uuid": "^3.3.2"
+  }
+}

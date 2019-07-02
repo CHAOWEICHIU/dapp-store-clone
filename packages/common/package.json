@@ -1,0 +1,19 @@
+{
+  "name": "@monorepo/common",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.3.2",
+    "typescript": "^3.5.2",
+    "@types/big.js": "^4.0.5"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2"
+  }
+}
