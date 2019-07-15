@@ -17,7 +17,8 @@
   "scripts": {
     "start:watch": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
-    "build:watch": "tsc --watch"
+    "build:watch": "tsc --watch",
+    "remove:node_modules": "rm -rf node_modules"
   },
   "dependencies": {
     "apollo-server": "^2.6.7",

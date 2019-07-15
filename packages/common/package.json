@@ -13,7 +13,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test": "jest"
+    "test": "jest",
+    "remove:node_modules": "rm -rf node_modules"
   },
   "dependencies": {
     "big.js": "^5.2.2"
